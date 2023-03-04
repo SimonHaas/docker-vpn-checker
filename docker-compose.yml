@@ -1,6 +1,7 @@
 version: "3.6"
 services:
   vpn:
+    container_name: vpn
     image: ghcr.io/bubuntux/nordlynx
     cap_add:
       - NET_ADMIN
@@ -16,22 +17,22 @@ services:
       - 8081:80
 
   vpnchecker_vpn:
+    container_name: vpnchecker_vpn
     build: .
     restart: always
     network_mode: service:vpn
     depends_on:
       - vpn
-    ports:
-      - 8081:80
     volumes:
       - ./src:/var/www/html
 
   vpnchecker_nonvpn:
+    container_name: vpnchecker_nonvpn
     build: .
     restart: always
     depends_on:
       - vpnchecker_vpn
     ports:
-      - 8080:80
+      - 8082:80
     volumes:
       - ./src:/var/www/html

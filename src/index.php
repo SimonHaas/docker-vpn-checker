@@ -23,8 +23,8 @@ function getIP()
     $curl_session = curl_init();
     curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, true); 
     curl_setopt($curl_session, CURLOPT_URL, 'ifconfig.me/all.json');
-    $result = curl_exec($curl_session );
-    curl_close($curl_session );
+    $result = curl_exec($curl_session);
+    curl_close($curl_session);
 
     return json_decode($result)->{'ip_addr'};
 }
@@ -33,8 +33,8 @@ function getIPFromPeer(string $peer)
 {
     $curl_session = curl_init();
     curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, true); 
-    curl_setopt($curl_session, CURLOPT_URL, $peer);
-    $result = curl_exec($curl_session );
+    curl_setopt($curl_session, CURLOPT_URL, $peer . '/index.php/IP');
+    $result = curl_exec($curl_session);
     curl_close($curl_session );
 
     return $result;
